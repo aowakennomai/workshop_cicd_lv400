@@ -1,7 +1,8 @@
 language: bash
 before_deploy:
   - zip -r latest *
-  - mv latest.zip deployment/20180926_lv400/workshop-${TRAVIS_BUILD_NUMBER}.zip
+  - test -d dpl_cd_upload || mkdir dpl_cd_upload
+  - mv latest.zip dpl_cd_upload/workshop-${TRAVIS_BUILD_NUMBER}.zip
 deploy:
 - provider: s3
   access_key_id: $AWS_ACCESS_KEY
@@ -12,11 +13,11 @@ deploy:
   region: us-east-1
   on:
     branch: master
-  bucket: y.c.chen.us-east-1
+  bucket: y.c.chen.us-east-1/deployment/20180926_lv400
 - provider: codedeploy
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_ACCESS_KEY
-  bucket: y.c.chen.us-east-1
+  bucket: y.c.chen.us-east-1/deployment/20180926_lv400
   key: workshop-${TRAVIS_BUILD_NUMBER}.zip
   application: cicd_workshop
   deployment_group: cicd_workshop_group
