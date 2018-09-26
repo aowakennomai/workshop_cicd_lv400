@@ -19,7 +19,7 @@ deploy:
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_ACCESS_KEY
   bucket: y.c.chen.us-east-1
-  key: workshop-${TRAVIS_BUILD_NUMBER}.zip
+  key: deployment/20180926_lv400/workshop-${TRAVIS_BUILD_NUMBER}.zip
   application: cicd_workshop
   deployment_group: cicd_workshop_group
   region: us-east-1
