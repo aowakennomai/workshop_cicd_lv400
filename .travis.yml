@@ -1,19 +1,20 @@
 language: bash
 before_deploy:
   - zip -r latest *
-  - test -d deployment2 || mkdir deployment2
-  - mv latest.zip deployment2/workshop-${TRAVIS_BUILD_NUMBER}.zip
+  - test -d my_local_dir || mkdir my_local_dir
+  - mv latest.zip my_local_dir/workshop-${TRAVIS_BUILD_NUMBER}.zip
 deploy:
 - provider: s3
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: 
     secure: $AWS_SECRET_ACCESS_KEY
-  local_dir: deployment2
+  local_dir: my_local_dir
   skip_cleanup: true
   region: us-east-1
   on:
     branch: master
   bucket: y.c.chen.us-east-1
+  upload-dir: deployment/20180926_lv400
 - provider: codedeploy
   access_key_id: $AWS_ACCESS_KEY
   secret_access_key: $AWS_SECRET_ACCESS_KEY
