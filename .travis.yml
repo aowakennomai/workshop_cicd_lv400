@@ -1,7 +1,6 @@
 language: bash
 before_deploy:
   - zip -r latest *
-  - test -d deployment/20180926_lv400
   - mv latest.zip deployment/20180926_lv400/workshop-${TRAVIS_BUILD_NUMBER}.zip
 deploy:
 - provider: s3
